@@ -51,12 +51,15 @@ func (c *Connection) Read(callback func(interface{})) error {
 func (c *Connection) Reader(callback func(interface{})) {
 	for {
 		var v interface{}
-		err := c.conn.ReadJSON(v)
+		err := c.conn.ReadJSON(&v)
 		if err != nil {
 			break
 		}
 
 		callback(v)
 	}
-	c.conn.Close()
+}
+
+func (c *Connection) Close() error {
+	return c.conn.Close()
 }

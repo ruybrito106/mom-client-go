@@ -1,8 +1,6 @@
 package distribution
 
 import (
-	"time"
-
 	infra "github.com/ruybrito106/mom-client-go/src/infrastructure"
 )
 
@@ -12,16 +10,16 @@ const (
 )
 
 type Proxy struct {
-	manager *CallManager
-	addr    string
+	// manager *CallManager
+	addr string
 }
 
 func New(addr string) (*Proxy, error) {
 
 	return &Proxy{
-		manager: &CallManager{
-			make(map[string](func() interface{}), 0),
-		},
+		// manager: &CallManager{
+		// 	make(map[string](func() interface{}), 0),
+		// },
 		addr: addr,
 	}, nil
 
@@ -63,7 +61,7 @@ func (p *Proxy) Subscribe(topic string, call func(interface{})) error {
 	}
 
 	conn.Write(packet)
-	time.Sleep(2 * time.Second)
+
 	conn.Reader(call)
 
 	return nil

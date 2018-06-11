@@ -15,13 +15,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	for i := 0; i < 20; i++ {
+	for i := 0; i < 1; i++ {
 		err = proxy.Publish("topic1", fmt.Sprintf("from_golang_%d", i))
 		if err == nil {
 			fmt.Println("Msg published successfully")
 		}
 	}
 
-	time.Sleep(100 * time.Second)
+	time.Sleep(1 * time.Second)
 
 }
