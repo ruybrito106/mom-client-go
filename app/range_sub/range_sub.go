@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"time"
 
 	dist "github.com/ruybrito106/mom-client-go/src/distribution"
 )
@@ -16,14 +15,15 @@ func main() {
 	}
 
 	call := func(v interface{}) {
-		fmt.Println("recebeu mizera")
+		fmt.Println("recebeu range")
 		fmt.Println(v)
 	}
 
-	go func() {
-		proxy.Subscribe("topic1", call)
-	}()
-
-	time.Sleep(100 * time.Second)
+	proxy.SubscribeForRangeQuery(
+		"topic1",
+		"2018-06-11T00:00:00",
+		"2018-06-12T12:00:00",
+		call,
+	)
 
 }
